@@ -16,7 +16,7 @@ Abre `index.html` en el navegador. Las fuentes se cargan desde Google Fonts, por
 - Reemplazar el testimonio de ejemplo (nombre ficticio) por uno real, con permiso para publicar nombre, cargo y empresa.
 - Agregar una cifra real por caso cuando se tenga.
 - Confirmar con Sotomayor Consulting el permiso para publicar el caso de medición.
-- Condiciones del diagnóstico (duración y costo).
+- Definir la duración del diagnóstico gratuito (el costo ya está definido: gratuito).
 - Correo propio cuando exista el dominio.
 - Confirmar el enlace de LinkedIn.
 
