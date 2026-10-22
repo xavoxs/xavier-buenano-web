@@ -13,10 +13,9 @@ Abre `index.html` en el navegador. Las fuentes se cargan desde Google Fonts, por
 
 ## Pendientes de contenido
 
-- Cifra o resultado medible para los casos "Propiedades en EEUU" y "Vitana Natural".
-- Testimonio con nombre, cargo y empresa.
+- Reemplazar las cifras y el testimonio marcados como [EJEMPLO] por datos reales (casos "Propiedades en EEUU" y "Vitana Natural", y testimonio con nombre, cargo y empresa).
+- Confirmar con Sotomayor Consulting el permiso para publicar el caso de medición.
 - Condiciones del diagnóstico (duración y costo).
-- Foto profesional para el nodo de perfil.
 - Correo propio cuando exista el dominio.
 - Confirmar el enlace de LinkedIn.
 

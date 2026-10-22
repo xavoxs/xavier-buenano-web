@@ -1,4 +1,4 @@
-<title>Xavier Buenaño</title>
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head><body style="margin:0"><title>Xavier Buenaño</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,500..900&family=Caveat:wght@500;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
 <style>
@@ -103,6 +103,10 @@ h1 { margin: 0; font-family: var(--font-display); font-weight: 800; font-stretch
 .root-role { margin: 16px 0 2px; font-family: var(--font-display); font-weight: 800; font-stretch: 80%; font-size: 1.35rem; line-height: 1.1; }
 .root-meta { margin: 0 0 8px; font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.04em; text-transform: uppercase; opacity: 0.9; }
 .root-text { margin: 0; font-size: 0.92rem; line-height: 1.45; }
+.root .root-note { color: var(--yellow); margin: 0 0 8px; font-size: 1.55rem; justify-content: flex-start; }
+.root .portrait { box-shadow: 6px 6px 0 #0B0C10; }
+.chips { list-style: none; display: flex; flex-wrap: wrap; gap: 6px; margin: 14px 0 0; padding: 0; }
+.chips li { font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.06em; text-transform: uppercase; border: 1.5px solid var(--on-blue); padding: 3px 8px; }
 
 .group { display: contents; }
 .group:nth-of-type(2) > * { grid-row: 2; }
@@ -279,19 +283,16 @@ ol.two { list-style: none; margin: 0; padding: 0; }
         <span class="col-label">Soluciones</span>
 
         <div class="root" id="root">
+          <p class="hand root-note"><span>con quién vas a hablar</span><svg width="44" height="30" viewBox="0 0 44 30" aria-hidden="true"><path d="M3 5 Q 30 0 36 24 M29 19 L36 26 L40 16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></p>
           <div class="portrait" id="portrait">
-            <img id="portrait-img" alt="Retrato de Xavier Buenaño" hidden>
-            <svg class="marks" id="marks" viewBox="0 0 100 125" preserveAspectRatio="none" aria-hidden="true"><path d="M0 12 V0 H12 M88 0 H100 V12 M100 113 V125 H88 M12 125 H0 V113" fill="none" stroke="#0B0C10" stroke-width="1.6" vector-effect="non-scaling-stroke"/></svg>
-            <div class="ph" id="ph">
-              <span class="ph-note">aquí va mi foto</span>
-              <button class="ph-btn" id="ph-btn" type="button">Probar una foto</button>
-              <span class="ph-small">Vista previa solo en este navegador. No se sube a ningún sitio.</span>
-              <input id="ph-file" type="file" accept="image/*" hidden>
-            </div>
+            <img id="portrait-img" alt="Retrato de Xavier Buenaño, con saco gris y camisa blanca, sobre fondo amarillo" src="assets/xavier.jpg" width="1122" height="1402">
           </div>
           <p class="root-role">Director de Marketing y Comunicación</p>
           <p class="root-meta">Sotomayor Consulting · Quito, Ecuador</p>
           <p class="root-text">Más de diez años entre comunicación, producción audiovisual y estrategia digital.</p>
+          <ul class="chips" aria-label="Áreas">
+            <li>Marketing</li><li>Automatización</li><li>Código</li>
+          </ul>
         </div>
 
         <div class="group">
@@ -394,18 +395,27 @@ ol.two { list-style: none; margin: 0; padding: 0; }
           <div class="case-grid">
             <div><span class="lbl">Reto</span><p>Crear desde cero una marca para ofrecer propiedades en Estados Unidos y hacerla reconocible en el mercado.</p></div>
             <div><span class="lbl">Solución</span><p>Estrategia de marca y publicitaria, campañas en Meta Ads y Google Ads, y contenido para Facebook, Instagram y TikTok.</p></div>
-            <div class="res"><span class="lbl">Resultado</span><p>La marca ganó reconocimiento y facilitó el cierre de negocios.</p></div>
+            <div class="res"><span class="lbl">Resultado</span><p>La marca ganó reconocimiento y facilitó el cierre de negocios. <strong>[EJEMPLO] +180 clientes potenciales en 90 días.</strong></p></div>
           </div>
-          <p class="hand"><svg width="34" height="26" viewBox="0 0 34 26" aria-hidden="true"><path d="M5 24 Q 6 10 24 4 M17 3 L25 4 L22 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>falta: una cifra (clientes potenciales, ventas o inversión)</span></p>
+          <p class="hand"><svg width="34" height="26" viewBox="0 0 34 26" aria-hidden="true"><path d="M5 24 Q 6 10 24 4 M17 3 L25 4 L22 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>cifra de ejemplo: reemplazar por el dato real y quitar la etiqueta</span></p>
+        </article>
+        <article class="case">
+          <div class="case-head"><h3 class="t">Medición de la landing de Sotomayor Consulting</h3><span class="meta">Sotomayor Consulting · Analítica y publicidad</span></div>
+          <div class="case-grid">
+            <div><span class="lbl">Reto</span><p>Registrar cada contacto de la landing y enviar esos datos a las plataformas de anuncios y de analítica, para campañas dirigidas a varios países.</p></div>
+            <div><span class="lbl">Solución</span><p>Google Tag Manager web más un contenedor server-side en Cloud Run, que envía eventos a TikTok Events API, Meta CAPI y Google Analytics 4.</p></div>
+            <div class="res"><span class="lbl">Resultado</span><p>Los eventos llegan a las tres plataformas desde el servidor, y las campañas de TikTok Ads cubren México, Ecuador y Guatemala.</p></div>
+          </div>
+          <p class="hand"><svg width="34" height="26" viewBox="0 0 34 26" aria-hidden="true"><path d="M5 24 Q 6 10 24 4 M17 3 L25 4 L22 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>por confirmar: permiso de la empresa para publicar este caso</span></p>
         </article>
         <article class="case">
           <div class="case-head"><h3 class="t">Vitana Natural (Vitally)</h3><span class="meta">Tienda en línea propia · 2019</span></div>
           <div class="case-grid">
             <div><span class="lbl">Reto</span><p>Vender productos propios por internet, con un sitio y canales de contacto a mi cargo.</p></div>
             <div><span class="lbl">Solución</span><p>Sitio en WordPress, tienda con WooCommerce, contenidos en redes y campañas en Facebook Ads y Google Ads.</p></div>
-            <div class="res"><span class="lbl">Resultado</span><p>Una tienda en línea propia, con sitio, canales y campañas bajo mi administración. <a href="https://somosvitally.com" target="_blank" rel="noopener">somosvitally.com</a></p></div>
+            <div class="res"><span class="lbl">Resultado</span><p>Una tienda en línea propia, con sitio, canales y campañas bajo mi administración. <strong>[EJEMPLO] 320 pedidos en los primeros 6 meses.</strong> <a href="https://somosvitally.com" target="_blank" rel="noopener">somosvitally.com</a></p></div>
           </div>
-          <p class="hand"><svg width="34" height="26" viewBox="0 0 34 26" aria-hidden="true"><path d="M5 24 Q 6 10 24 4 M17 3 L25 4 L22 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>falta: un resultado medible (ventas, pedidos o visitas)</span></p>
+          <p class="hand"><svg width="34" height="26" viewBox="0 0 34 26" aria-hidden="true"><path d="M5 24 Q 6 10 24 4 M17 3 L25 4 L22 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>cifra de ejemplo: reemplazar por el dato real y quitar la etiqueta</span></p>
         </article>
         <article class="case">
           <div class="case-head"><h3 class="t">Comercializadora Rene's</h3><span class="meta">Odoo y marketing digital · 2016 a 2018</span></div>
@@ -430,8 +440,8 @@ ol.two { list-style: none; margin: 0; padding: 0; }
           <div class="fact"><span class="fact-v">2022</span><span class="fact-l">al frente del marketing y la comunicación de Sotomayor Consulting</span></div>
         </div>
         <div class="testi">
-          <p>Aquí irá un testimonio con nombre, cargo y empresa.</p>
-          <p class="hand"><svg width="34" height="26" viewBox="0 0 34 26" aria-hidden="true"><path d="M5 24 Q 6 10 24 4 M17 3 L25 4 L22 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>falta: pedir un testimonio a un cliente o a un jefe</span></p>
+          <p><strong>[TESTIMONIO DE EJEMPLO]</strong> “Xavier ordenó cómo captábamos y atendíamos a los clientes. Pasamos de mensajes dispersos a un proceso claro, con datos que sí usamos para decidir.”</p><p class="meta">Nombre Apellido · Cargo, Empresa</p><p>Referencias laborales disponibles a pedido.</p>
+          <p class="hand"><svg width="34" height="26" viewBox="0 0 34 26" aria-hidden="true"><path d="M5 24 Q 6 10 24 4 M17 3 L25 4 L22 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>texto de ejemplo: reemplazar por un testimonio real, con permiso para publicar nombre y cargo</span></p>
         </div>
       </div>
     </section>
@@ -615,3 +625,5 @@ ol.two { list-style: none; margin: 0; padding: 0; }
   if (window.ResizeObserver) new ResizeObserver(draw).observe(tree);
 })();
 </script>
+
+</body></html>
