@@ -184,7 +184,7 @@ ol.two { list-style: none; margin: 0; padding: 0; }
 
 /* Contacto */
 .contact { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 28px 48px; margin-top: 80px; padding: clamp(24px, 5vw, 56px); background: var(--yellow); color: var(--on-yellow); }
-.contact h2 { font-size: clamp(3.2rem, 9.5vw, 7.6rem); line-height: 0.88; }
+.contact h2 { font-size: clamp(2.8rem, 6.4vw, 5.4rem); line-height: 0.9; hyphens: none; overflow-wrap: normal; }
 .contact p { margin: 0 0 20px; max-width: 44ch; }
 .contact .hand { color: var(--on-yellow); margin: 0 0 20px; }
 .mail { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; margin-bottom: 18px; }
@@ -261,6 +261,37 @@ ol.two { list-style: none; margin: 0; padding: 0; }
 @media (prefers-reduced-motion: no-preference) {
   .btn, .nav a { transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease; }
   .branch, .leaf, .w { transition: opacity 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease, stroke 0.18s ease; }
+}
+
+/* Formulario emergente */
+.cta-form { display: inline-block; margin: 0 0 22px; font-family: var(--font-display); font-weight: 800; font-stretch: 90%; font-size: 1rem; letter-spacing: 0.06em; text-transform: uppercase; background: #0B0C10; color: #FFD21F; border: 2px solid #0B0C10; padding: 16px 26px; cursor: pointer; box-shadow: 5px 5px 0 rgba(11,12,16,0.35); }
+.cta-form:hover { background: #fff; color: #0B0C10; }
+.dlg { width: min(560px, calc(100vw - 24px)); max-height: calc(100dvh - 24px); overflow: auto; padding: 0; border: 2px solid var(--ink); background: var(--bg); color: var(--ink); box-shadow: 8px 8px 0 var(--blue); font-family: var(--font-body); }
+.dlg::backdrop { background: rgba(11,12,16,0.72); }
+.dlg-in { padding: 24px 24px 26px; }
+.dlg-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; margin-bottom: 6px; }
+.dlg h2 { font-size: clamp(2rem, 7vw, 2.8rem); }
+.dlg-x { flex: none; width: 44px; height: 44px; display: grid; place-items: center; background: transparent; color: var(--ink); border: 2px solid var(--ink); font-size: 1.4rem; line-height: 1; cursor: pointer; }
+.dlg-x:hover { background: var(--ink); color: var(--bg); }
+.dlg-sub { margin: 0 0 18px; color: var(--muted); font-size: 0.95rem; }
+.fld { display: block; margin-bottom: 14px; }
+.fld > span { display: block; margin-bottom: 5px; font-family: var(--font-mono); font-size: 0.74rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+.fld input, .fld textarea { width: 100%; font: inherit; font-size: 16px; color: var(--ink); background: var(--surface); border: 2px solid var(--ink); padding: 12px 12px; border-radius: 0; }
+.fld textarea { min-height: 130px; resize: vertical; line-height: 1.45; }
+.fld input:focus, .fld textarea:focus { outline: 3px solid var(--link); outline-offset: 1px; }
+.fld-row { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 0 14px; }
+.dlg-hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+.dlg-send { width: 100%; font-family: var(--font-display); font-weight: 800; font-stretch: 90%; font-size: 1rem; letter-spacing: 0.06em; text-transform: uppercase; background: var(--ink); color: var(--bg); border: 2px solid var(--ink); padding: 16px; cursor: pointer; }
+.dlg-send:hover { background: var(--link); border-color: var(--link); color: #fff; }
+.dlg-note { margin: 12px 0 0; font-size: 0.82rem; color: var(--muted); }
+.dlg-msg { margin: 14px 0 0; padding: 12px 14px; border-left: 4px solid var(--link); background: var(--surface); font-size: 0.92rem; }
+.dlg-msg[hidden] { display: none; }
+.dlg-msg button { margin-top: 8px; font: inherit; font-size: 0.85rem; font-weight: 600; color: var(--link); background: none; border: 0; padding: 4px 0; text-decoration: underline; cursor: pointer; }
+@media (max-width: 620px) {
+  .dlg { width: 100vw; max-width: 100vw; max-height: 100dvh; margin: auto 0 0; border-width: 2px 0 0; box-shadow: none; }
+  .dlg-in { padding: 20px 16px 24px; }
+  .fld-row { grid-template-columns: minmax(0, 1fr); }
+  .cta-form { display: block; width: 100%; text-align: center; }
 }
 </style>
 
@@ -500,10 +531,11 @@ ol.two { list-style: none; margin: 0; padding: 0; }
     </section>
 
     <section class="contact" id="contacto">
-      <h2>Conver&shy;semos</h2>
+      <h2>Conversemos</h2>
       <div>
         <p>Pide un diagnóstico de cómo captas, atiendes y mides a tus clientes. Revisamos tu situación actual y definimos por dónde conviene empezar.</p>
         <p class="hand"><svg width="34" height="26" viewBox="0 0 34 26" aria-hidden="true"><path d="M5 24 Q 6 10 24 4 M17 3 L25 4 L22 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>por definir: duración y si es gratuito o de pago</span></p>
+        <button class="cta-form" id="open-form" type="button" aria-haspopup="dialog">Cuéntame tu caso</button>
         <div class="mail">
           <span class="mail-addr" id="mail-addr">francisco.buenano@gmail.com</span>
           <button class="copy" id="copy-btn" type="button">Copiar</button>
@@ -659,6 +691,115 @@ ol.two { list-style: none; margin: 0; padding: 0; }
   window.addEventListener("load", draw);
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(draw);
   if (window.ResizeObserver) new ResizeObserver(draw).observe(tree);
+})();
+</script>
+
+<dialog class="dlg" id="form-dlg" aria-labelledby="dlg-title">
+  <div class="dlg-in">
+    <div class="dlg-head">
+      <h2 id="dlg-title">Cuéntame tu caso</h2>
+      <button class="dlg-x" id="dlg-close" type="button" aria-label="Cerrar formulario">×</button>
+    </div>
+    <p class="dlg-sub">Déjame tus datos y cuéntame sobre tu negocio. Te respondo con una propuesta de por dónde empezar.</p>
+    <form id="lead-form" novalidate>
+      <div class="fld-row">
+        <label class="fld"><span>Nombre *</span><input name="nombre" type="text" autocomplete="name" required></label>
+        <label class="fld"><span>Empresa</span><input name="empresa" type="text" autocomplete="organization"></label>
+      </div>
+      <div class="fld-row">
+        <label class="fld"><span>Correo *</span><input name="correo" type="email" autocomplete="email" inputmode="email" required></label>
+        <label class="fld"><span>WhatsApp o teléfono</span><input name="telefono" type="tel" autocomplete="tel" inputmode="tel"></label>
+      </div>
+      <label class="fld"><span>Cuéntame sobre tu negocio y qué te gustaría mejorar *</span><textarea name="mensaje" required placeholder="A qué se dedica tu negocio, cómo te llegan hoy los clientes y qué quisieras que funcione mejor."></textarea></label>
+      <div class="dlg-hp" aria-hidden="true"><label>No llenar<input name="web" type="text" tabindex="-1" autocomplete="off"></label></div>
+      <button class="dlg-send" type="submit">Enviar mensaje</button>
+      <p class="dlg-note">Usaré tus datos solo para responderte.</p>
+      <div class="dlg-msg" id="dlg-msg" role="status" hidden></div>
+    </form>
+  </div>
+</dialog>
+<script>
+(function () {
+  /* Si más adelante conectas un flujo de n8n o un servicio de formularios,
+     pega aquí su dirección (URL). Mientras esté vacío, el mensaje se envía
+     abriendo el correo del visitante con el texto ya escrito. */
+  var ENDPOINT = "";
+  var TO = "francisco.buenano@gmail.com";
+
+  var dlg = document.getElementById("form-dlg");
+  var openBtn = document.getElementById("open-form");
+  var closeBtn = document.getElementById("dlg-close");
+  var form = document.getElementById("lead-form");
+  var msg = document.getElementById("dlg-msg");
+  if (!dlg || !openBtn || !form) return;
+
+  function open() {
+    msg.hidden = true;
+    if (typeof dlg.showModal === "function") { dlg.showModal(); } else { dlg.setAttribute("open", ""); }
+    var first = form.elements["nombre"];
+    if (first) first.focus();
+  }
+  function close() {
+    if (typeof dlg.close === "function") { dlg.close(); } else { dlg.removeAttribute("open"); }
+    openBtn.focus();
+  }
+  openBtn.addEventListener("click", open);
+  closeBtn.addEventListener("click", close);
+  dlg.addEventListener("click", function (e) { if (e.target === dlg) close(); });
+
+  function show(text, copyText) {
+    msg.textContent = text;
+    if (copyText) {
+      var b = document.createElement("button");
+      b.type = "button";
+      b.textContent = "Copiar el mensaje";
+      b.addEventListener("click", function () {
+        try { navigator.clipboard.writeText(copyText); b.textContent = "Copiado"; } catch (e) {}
+      });
+      msg.appendChild(document.createElement("br"));
+      msg.appendChild(b);
+    }
+    msg.hidden = false;
+  }
+
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    var f = form.elements;
+    if (f["web"].value) return;
+    var nombre = f["nombre"].value.trim();
+    var correo = f["correo"].value.trim();
+    var texto = f["mensaje"].value.trim();
+    if (!nombre || !texto || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(correo)) {
+      show("Revisa el nombre, un correo válido y el mensaje: son obligatorios.");
+      return;
+    }
+    var data = {
+      nombre: nombre,
+      empresa: f["empresa"].value.trim(),
+      correo: correo,
+      telefono: f["telefono"].value.trim(),
+      mensaje: texto
+    };
+    var plain = "Nombre: " + data.nombre + "\nEmpresa: " + data.empresa + "\nCorreo: " + data.correo +
+      "\nTeléfono: " + data.telefono + "\n\nSobre mi negocio y lo que quiero mejorar:\n" + data.mensaje;
+
+    if (ENDPOINT) {
+      fetch(ENDPOINT, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(data) })
+        .then(function (r) {
+          if (!r.ok) throw new Error("x");
+          form.reset();
+          show("Gracias, " + nombre + ". Recibí tu mensaje y te respondo pronto.");
+        })
+        .catch(function () { show("No se pudo enviar. Escríbeme a " + TO + ".", plain); });
+      return;
+    }
+    var href = "mailto:" + TO + "?subject=" + encodeURIComponent("Quiero contarte mi caso: " + nombre) +
+      "&body=" + encodeURIComponent(plain);
+    var a = document.createElement("a");
+    a.href = href; a.target = "_blank"; a.rel = "noopener";
+    document.body.appendChild(a); a.click(); a.remove();
+    show("Se abrió tu programa de correo con el mensaje listo. Si no se abrió, copia el texto y escríbeme a " + TO + ".", plain);
+  });
 })();
 </script>
 
