@@ -13,7 +13,8 @@ Abre `index.html` en el navegador. Las fuentes se cargan desde Google Fonts, por
 
 ## Pendientes de contenido
 
-- Reemplazar las cifras y el testimonio marcados como [EJEMPLO] por datos reales (casos "Propiedades en EEUU" y "Vitana Natural", y testimonio con nombre, cargo y empresa).
+- Reemplazar el testimonio de ejemplo (nombre ficticio) por uno real, con permiso para publicar nombre, cargo y empresa.
+- Agregar una cifra real por caso cuando se tenga.
 - Confirmar con Sotomayor Consulting el permiso para publicar el caso de medición.
 - Condiciones del diagnóstico (duración y costo).
 - Correo propio cuando exista el dominio.
