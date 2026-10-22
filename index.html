@@ -293,6 +293,26 @@ ol.two { list-style: none; margin: 0; padding: 0; }
   .fld-row { grid-template-columns: minmax(0, 1fr); }
   .cta-form { display: block; width: 100%; text-align: center; }
 }
+
+.dlg-in[data-state="sending"] .st-form, .dlg-in[data-state="done"] .st-form { display: none; }
+.st-load, .st-done { display: none; }
+.dlg-in[data-state="sending"] .st-load { display: block; }
+.dlg-in[data-state="done"] .st-done { display: block; }
+.dlg-in[data-state="sending"] .dlg-head, .dlg-in[data-state="done"] .dlg-head { justify-content: flex-end; }
+.dlg-in[data-state="sending"] #dlg-title, .dlg-in[data-state="done"] #dlg-title { display: none; }
+.st-load { padding: 56px 0 64px; text-align: center; }
+.st-load p { margin: 0 0 22px; font-family: var(--font-display); font-weight: 800; font-stretch: 80%; font-size: 1.7rem; text-transform: uppercase; }
+.bar { height: 14px; border: 2px solid var(--ink); background: var(--surface); overflow: hidden; }
+.bar i { display: block; height: 100%; width: 40%; background: var(--blue); animation: slide 1.1s ease-in-out infinite; }
+@keyframes slide { 0% { transform: translateX(-100%); } 100% { transform: translateX(260%); } }
+.st-done { text-align: center; padding: 4px 0 6px; }
+.st-done svg { width: 150px; height: 150px; display: block; margin: 0 auto 8px; overflow: visible; }
+.st-done h2 { margin: 0 0 10px; }
+.st-done p { margin: 0 auto 20px; max-width: 38ch; color: var(--muted); }
+.st-done .hand { justify-content: center; color: var(--link); margin: 0 0 18px; font-size: 1.5rem; }
+.pop { transform-origin: center; animation: pop 0.5s cubic-bezier(.2,1.4,.4,1) both; }
+@keyframes pop { 0% { transform: scale(0.4); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .bar i, .pop { animation: none; } .bar i { width: 100%; } }
 </style>
 
 <script type="application/ld+json">
@@ -696,13 +716,13 @@ ol.two { list-style: none; margin: 0; padding: 0; }
 </script>
 
 <dialog class="dlg" id="form-dlg" aria-labelledby="dlg-title">
-  <div class="dlg-in">
+  <div class="dlg-in" id="dlg-in" data-state="form">
     <div class="dlg-head">
       <h2 id="dlg-title">Cuéntame tu caso</h2>
       <button class="dlg-x" id="dlg-close" type="button" aria-label="Cerrar formulario">×</button>
     </div>
-    <p class="dlg-sub">Déjame tus datos y cuéntame sobre tu negocio. Te respondo con una propuesta de por dónde empezar.</p>
-    <form id="lead-form" novalidate>
+    <p class="dlg-sub st-form">Déjame tus datos y cuéntame sobre tu negocio. Te respondo con una propuesta de por dónde empezar.</p>
+    <form id="lead-form" class="st-form" novalidate>
       <div class="fld-row">
         <label class="fld"><span>Nombre *</span><input name="nombre" type="text" autocomplete="name" required></label>
         <label class="fld"><span>Empresa</span><input name="empresa" type="text" autocomplete="organization"></label>
@@ -717,6 +737,27 @@ ol.two { list-style: none; margin: 0; padding: 0; }
       <p class="dlg-note">Usaré tus datos solo para responderte.</p>
       <div class="dlg-msg" id="dlg-msg" role="status" hidden></div>
     </form>
+    <div class="st-load" role="status" aria-live="polite">
+      <p>Enviando tu mensaje</p>
+      <div class="bar"><i></i></div>
+    </div>
+    <div class="st-done" role="status" aria-live="polite">
+      <svg viewBox="0 0 160 160" aria-hidden="true">
+        <rect x="26" y="26" width="112" height="112" fill="#2B44FF"/>
+        <g class="pop">
+          <rect x="14" y="14" width="112" height="112" fill="#FFD21F" stroke="#0B0C10" stroke-width="3"/>
+          <path d="M40 72 L60 92 L100 46" fill="none" stroke="#0B0C10" stroke-width="12" stroke-linecap="square" stroke-linejoin="miter"/>
+        </g>
+        <g stroke="#0B0C10" stroke-width="3" stroke-linecap="round" fill="none">
+          <path d="M138 12 L146 2"/><path d="M146 28 L158 26"/><path d="M128 4 L128 -8"/>
+          <path d="M6 138 L-4 146"/><path d="M20 150 L16 160"/>
+        </g>
+      </svg>
+      <h2 id="done-title">¡Gracias!</h2>
+      <p id="done-text">Recibí tu mensaje. Reviso tu caso y te respondo pronto.</p>
+      <p class="hand"><span>hablemos de tu negocio</span></p>
+      <button class="dlg-send" id="done-close" type="button">Cerrar</button>
+    </div>
   </div>
 </dialog>
 <script>
@@ -728,14 +769,20 @@ ol.two { list-style: none; margin: 0; padding: 0; }
   var TO = "francisco.buenano@gmail.com";
 
   var dlg = document.getElementById("form-dlg");
+  var inner = document.getElementById("dlg-in");
   var openBtn = document.getElementById("open-form");
   var closeBtn = document.getElementById("dlg-close");
+  var doneClose = document.getElementById("done-close");
   var form = document.getElementById("lead-form");
   var msg = document.getElementById("dlg-msg");
+  var doneTitle = document.getElementById("done-title");
+  var doneText = document.getElementById("done-text");
   if (!dlg || !openBtn || !form) return;
 
+  function state(s) { inner.setAttribute("data-state", s); }
   function open() {
     msg.hidden = true;
+    state("form");
     if (typeof dlg.showModal === "function") { dlg.showModal(); } else { dlg.setAttribute("open", ""); }
     var first = form.elements["nombre"];
     if (first) first.focus();
@@ -746,6 +793,7 @@ ol.two { list-style: none; margin: 0; padding: 0; }
   }
   openBtn.addEventListener("click", open);
   closeBtn.addEventListener("click", close);
+  doneClose.addEventListener("click", close);
   dlg.addEventListener("click", function (e) { if (e.target === dlg) close(); });
 
   function show(text, copyText) {
@@ -761,6 +809,15 @@ ol.two { list-style: none; margin: 0; padding: 0; }
       msg.appendChild(b);
     }
     msg.hidden = false;
+  }
+  function finish(nombre) {
+    doneTitle.textContent = "¡Gracias, " + nombre + "!";
+    doneText.textContent = "Recibí tu mensaje. Reviso tu caso y te respondo pronto" +
+      (form.elements["telefono"].value.trim() ? " por correo o WhatsApp." : " por correo.");
+    form.reset();
+    msg.hidden = true;
+    state("done");
+    doneClose.focus();
   }
 
   form.addEventListener("submit", function (e) {
@@ -788,13 +845,16 @@ ol.two { list-style: none; margin: 0; padding: 0; }
       "\nTeléfono: " + data.telefono + "\n\nSobre mi negocio y lo que quiero mejorar:\n" + data.mensaje;
 
     if (ENDPOINT) {
-      fetch(ENDPOINT, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(data) })
-        .then(function (r) {
-          if (!r.ok) throw new Error("x");
-          form.reset();
-          show("Gracias, " + nombre + ". Recibí tu mensaje y te respondo pronto.");
-        })
-        .catch(function () { show("No se pudo enviar. Escríbeme a " + TO + ".", plain); });
+      state("sending");
+      var wait = new Promise(function (r) { setTimeout(r, 1200); });
+      var req = fetch(ENDPOINT, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(data) })
+        .then(function (r) { if (!r.ok) throw new Error("x"); });
+      Promise.all([req, wait])
+        .then(function () { finish(nombre); })
+        .catch(function () {
+          state("form");
+          show("No se pudo enviar. Tus datos siguen aquí: inténtalo de nuevo o escríbeme a " + TO + ".", plain);
+        });
       return;
     }
     var href = "mailto:" + TO + "?subject=" + encodeURIComponent("Quiero contarte mi caso: " + nombre) +
@@ -806,5 +866,4 @@ ol.two { list-style: none; margin: 0; padding: 0; }
   });
 })();
 </script>
-
 </body></html>
