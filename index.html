@@ -721,10 +721,10 @@ ol.two { list-style: none; margin: 0; padding: 0; }
 </dialog>
 <script>
 (function () {
-  /* Si más adelante conectas un flujo de n8n o un servicio de formularios,
-     pega aquí su dirección (URL). Mientras esté vacío, el mensaje se envía
-     abriendo el correo del visitante con el texto ya escrito. */
-  var ENDPOINT = "";
+  /* Los datos se envían por POST (JSON) al webhook de n8n. Campos: nombre,
+     empresa, correo, telefono, mensaje, origen, pagina, fecha. Si la
+     dirección queda vacía, se abre el correo del visitante con el texto escrito. */
+  var ENDPOINT = "https://n8n.sotomayorconsulting.com/webhook/perfil-profesional";
   var TO = "francisco.buenano@gmail.com";
 
   var dlg = document.getElementById("form-dlg");
@@ -779,7 +779,10 @@ ol.two { list-style: none; margin: 0; padding: 0; }
       empresa: f["empresa"].value.trim(),
       correo: correo,
       telefono: f["telefono"].value.trim(),
-      mensaje: texto
+      mensaje: texto,
+      origen: "perfil-profesional",
+      pagina: location.href,
+      fecha: new Date().toISOString()
     };
     var plain = "Nombre: " + data.nombre + "\nEmpresa: " + data.empresa + "\nCorreo: " + data.correo +
       "\nTeléfono: " + data.telefono + "\n\nSobre mi negocio y lo que quiero mejorar:\n" + data.mensaje;
