@@ -1,4 +1,2 @@
 User-agent: *
 Allow: /
-
-Sitemap: https://xavoxs.github.io/xavier-buenano-web/sitemap.xml

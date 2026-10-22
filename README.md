@@ -23,3 +23,12 @@ Abre `index.html` en el navegador. Las fuentes se cargan desde Google Fonts, por
 ## Estado
 
 Borrador. El repositorio es privado hasta que el contenido esté completo.
+
+## Indexación en Google
+
+Por ahora la página está marcada como `noindex, nofollow` (etiqueta `robots` en `index.html`) para que Google no la muestre mientras se completa el contenido.
+
+Para publicarla en buscadores:
+1. En `index.html`, cambiar `noindex, nofollow` por `index, follow, max-image-preview:large`.
+2. En `robots.txt`, agregar la línea `Sitemap: https://xavoxs.github.io/xavier-buenano-web/sitemap.xml`.
+3. Registrar la propiedad en Google Search Console, enviar el sitemap y solicitar la indexación.
