@@ -66,10 +66,11 @@ a { color: inherit; }
 
 /* Introducción */
 .intro { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 28px 48px; margin-top: 40px; align-items: end; }
-h1 { margin: 0; font-family: var(--font-display); font-weight: 800; font-stretch: 76%; font-size: clamp(2.8rem, 7.2vw, 5.6rem); line-height: 0.95; letter-spacing: -0.02em; text-wrap: balance; }
+h1 { margin: 0; font-family: var(--font-display); font-weight: 800; font-stretch: 76%; font-size: clamp(2.8rem, 7.2vw, 5.6rem); line-height: 1; letter-spacing: -0.02em; text-wrap: balance; }
 .scribble { position: relative; display: inline-block; }
-.scribble svg { position: absolute; left: 0; bottom: -0.16em; width: 100%; height: 0.26em; overflow: visible; }
-.scribble path { fill: none; stroke: var(--link); stroke-width: 3.4; stroke-linecap: round; vector-effect: non-scaling-stroke; }
+.scribble svg { position: absolute; left: 0; bottom: -0.07em; width: 100%; height: 0.2em; overflow: visible; }
+.scribble path { fill: none; stroke: var(--link); stroke-width: 4.5; stroke-linecap: round; vector-effect: non-scaling-stroke; }
+.stick { display: none; }
 .lead { color: var(--muted); max-width: 52ch; margin: 0 0 6px; }
 .cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 20px; }
 .btn { display: inline-block; font-family: var(--font-display); font-weight: 700; font-stretch: 90%; font-size: 0.95rem; letter-spacing: 0.06em; text-transform: uppercase; padding: 14px 22px; border: 2px solid var(--ink); text-decoration: none; }
@@ -210,8 +211,46 @@ ol.two { list-style: none; margin: 0; padding: 0; }
   .leaves { margin: 12px 0 0 14px; padding-left: 20px; border-left: 2px solid var(--ink); gap: 10px; }
   .leaf::before { content: ""; position: absolute; left: -22px; top: 50%; width: 20px; border-top: 2px solid var(--ink); }
 }
+@media (max-width: 900px) {
+  .hint { display: none; }
+}
 @media (max-width: 620px) {
-  body { font-size: 16px; }
+  body { font-size: 16px; padding-top: 12px; padding-bottom: 96px; }
+  /* Barra superior: logo y menú en una sola fila deslizable */
+  .top { gap: 10px; padding-bottom: 6px; }
+  .nav { width: 100%; flex-wrap: nowrap; overflow-x: auto; gap: 0 20px; margin-inline: -16px; padding-inline: 16px; width: calc(100% + 32px); font-size: 0.8rem; scrollbar-width: none; }
+  .nav::-webkit-scrollbar { display: none; }
+  .nav a { white-space: nowrap; padding: 12px 0; }
+  /* Portada */
+  .intro { margin-top: 28px; gap: 20px; }
+  .cta { flex-direction: column; margin-top: 18px; }
+  .btn { width: 100%; text-align: center; padding: 16px 22px; }
+  /* Perfil compacto: foto pequeña junto al cargo */
+  .tree { margin-top: 28px; }
+  .root { max-width: none; display: grid; grid-template-columns: 112px minmax(0, 1fr); column-gap: 14px; padding: 14px 14px 16px; margin-bottom: 24px; }
+  .root > * { grid-column: 1 / -1; }
+  .root .root-note { font-size: 1.3rem; margin-bottom: 10px; }
+  .root .portrait { grid-column: 1; grid-row: 2 / span 2; padding: 0; box-shadow: 4px 4px 0 #0B0C10; }
+  .root .root-role { grid-column: 2; grid-row: 2; align-self: end; margin: 0 0 6px; font-size: 1.2rem; }
+  .root .root-meta { grid-column: 2; grid-row: 3; align-self: start; margin: 0; font-size: 0.64rem; }
+  .root .root-text { margin-top: 16px; }
+  /* Servicios y soluciones: áreas táctiles amplias */
+  .branch { padding: 16px; }
+  .branch h3 { font-size: 1.4rem; }
+  .leaf { padding: 12px 14px; }
+  /* Secciones */
+  .sec { margin-top: 52px; }
+  h2 { font-size: 2.6rem; }
+  .case-head h3.t { font-size: 1.4rem; }
+  .testi { padding: 18px; }
+  /* Contacto */
+  .contact { margin-top: 56px; padding: 24px 20px 28px; }
+  .contact h2 { font-size: 3rem; hyphens: none; overflow-wrap: normal; }
+  .mail-addr { font-size: 0.92rem; }
+  .copy { padding: 12px 16px; }
+  .links a { padding: 8px 0; }
+  /* Botón fijo de contacto */
+  .stick { display: block; position: fixed; left: 12px; right: 12px; bottom: max(12px, env(safe-area-inset-bottom, 0px)); z-index: 20; text-align: center; font-family: var(--font-display); font-weight: 800; font-stretch: 90%; font-size: 0.95rem; letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none; padding: 16px; background: var(--ink); color: var(--bg); border: 2px solid var(--ink); box-shadow: 4px 4px 0 var(--link); }
   .facts { grid-template-columns: minmax(0, 1fr); }
   .fact, .fact + .fact { padding: 16px 0; border-left: 0; }
   .fact + .fact { border-top: 1px solid var(--line); }
@@ -263,7 +302,7 @@ ol.two { list-style: none; margin: 0; padding: 0; }
 
   <main id="inicio">
     <section class="intro">
-      <h1>Ordeno cómo tu empresa <span class="scribble">capta, atiende y mide<svg viewBox="0 0 200 12" preserveAspectRatio="none" aria-hidden="true"><path d="M2 7 Q 14 1 26 7 T 50 7 T 74 7 T 98 7 T 122 7 T 146 7 T 170 7 T 198 5"/></svg></span> a sus clientes</h1>
+      <h1>Ordeno cómo tu empresa capta, atiende y <span class="scribble">mide<svg viewBox="0 0 60 12" preserveAspectRatio="none" aria-hidden="true"><path d="M2 7 Q 9 1 16 7 T 30 7 T 44 7 T 58 5"/></svg></span> a sus clientes</h1>
       <div>
         <p class="lead">Conecto publicidad, automatización con IA y desarrollo web para que cada oportunidad de venta se registre, reciba seguimiento a tiempo y se pueda medir. Trabajo con empresas y emprendedores que quieren dejar de depender de tareas manuales.</p>
         <div class="cta">
@@ -405,7 +444,6 @@ ol.two { list-style: none; margin: 0; padding: 0; }
             <div><span class="lbl">Solución</span><p>Google Tag Manager web más un contenedor server-side en Cloud Run, que envía eventos a TikTok Events API, Meta CAPI y Google Analytics 4.</p></div>
             <div class="res"><span class="lbl">Resultado</span><p>Se implementó una medición centralizada de conversiones en GA4, Meta y TikTok Ads, mejorando la trazabilidad de los datos para optimizar las decisiones publicitarias.</p></div>
           </div>
-          <p class="hand"><svg width="34" height="26" viewBox="0 0 34 26" aria-hidden="true"><path d="M5 24 Q 6 10 24 4 M17 3 L25 4 L22 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>por confirmar: permiso de la empresa para publicar este caso</span></p>
         </article>
         <article class="case">
           <div class="case-head"><h3 class="t">Vitana Natural (Vitally)</h3><span class="meta">Tienda en línea propia · 2019</span></div>
@@ -438,8 +476,7 @@ ol.two { list-style: none; margin: 0; padding: 0; }
           <div class="fact"><span class="fact-v">2022</span><span class="fact-l">al frente del marketing y la comunicación de Sotomayor Consulting</span></div>
         </div>
         <div class="testi">
-          <p>“Su trabajo nos permitió organizar nuestra estrategia digital, mejorar la gestión de clientes potenciales y contar con información más clara para tomar decisiones. Destaco su compromiso, visión estratégica y capacidad para transformar ideas en soluciones concretas.”</p><p class="meta">Mariana Salazar · Gerente Comercial · Nombre ficticio</p><p>Referencias laborales disponibles a pedido.</p>
-          <p class="hand"><svg width="34" height="26" viewBox="0 0 34 26" aria-hidden="true"><path d="M5 24 Q 6 10 24 4 M17 3 L25 4 L22 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>testimonio de ejemplo con nombre ficticio: reemplazar por uno real, con permiso para publicar nombre y cargo</span></p>
+          <p>“Su trabajo nos permitió organizar nuestra estrategia digital, mejorar la gestión de clientes potenciales y contar con información más clara para tomar decisiones. Destaco su compromiso, visión estratégica y capacidad para transformar ideas en soluciones concretas.”</p><p class="meta">Mariana Salazar · Gerente Comercial · Nombre ficticio</p>
         </div>
       </div>
     </section>
@@ -479,6 +516,7 @@ ol.two { list-style: none; margin: 0; padding: 0; }
     </section>
   </main>
 
+  <a class="stick" href="#contacto">Pedir un diagnóstico</a>
   <footer class="foot">
     <span>© 2026</span>
     <span>Quito, Ecuador</span>
