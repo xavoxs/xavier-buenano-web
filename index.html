@@ -23,6 +23,7 @@
 <link rel="icon" href="favicon.ico" sizes="any">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 </head><body style="margin:0"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,500..900&family=Caveat:wght@500;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<link rel="preload" as="image" href="assets/xavier.jpg" fetchpriority="high">
 <style>
 /* Layout concept: estilo suizo orientado al cliente. Portada con la promesa, árbol de nodos (perfil, servicios, soluciones) como pieza central, y luego secciones en rejilla de dos columnas: problemas, proceso, casos (reto, solución, resultado), respaldo, sobre mí y un único contacto. */
 :root {
@@ -249,13 +250,7 @@ ol.two { list-style: none; margin: 0; padding: 0; }
   .btn { width: 100%; text-align: center; padding: 16px 22px; }
   /* Perfil compacto: foto pequeña junto al cargo */
   .tree { margin-top: 28px; }
-  .root { max-width: none; display: grid; grid-template-columns: 112px minmax(0, 1fr); column-gap: 14px; padding: 14px 14px 16px; margin-bottom: 24px; }
-  .root > * { grid-column: 1 / -1; }
-  .root .root-note { font-size: 1.3rem; margin-bottom: 10px; }
-  .root .portrait { grid-column: 1; grid-row: 2 / span 2; padding: 0; box-shadow: 4px 4px 0 #0B0C10; }
-  .root .root-role { grid-column: 2; grid-row: 2; align-self: end; margin: 0 0 6px; font-size: 1.2rem; }
-  .root .root-meta { grid-column: 2; grid-row: 3; align-self: start; margin: 0; font-size: 0.64rem; }
-  .root .root-text { margin-top: 16px; }
+  .root { max-width: none; padding: 16px; margin-bottom: 24px; }
   /* Servicios y soluciones: áreas táctiles amplias */
   .branch { padding: 16px; }
   .branch h3 { font-size: 1.4rem; }
@@ -272,7 +267,8 @@ ol.two { list-style: none; margin: 0; padding: 0; }
   .copy { padding: 12px 16px; }
   .links a { padding: 8px 0; }
   /* Botón fijo de contacto */
-  .stick { display: block; position: fixed; left: 12px; right: 80px; bottom: max(12px, env(safe-area-inset-bottom, 0px)); z-index: 20; text-align: center; font-family: var(--font-display); font-weight: 800; font-stretch: 90%; font-size: 0.95rem; letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none; padding: 16px; background: var(--ink); color: var(--bg); border: 2px solid var(--ink); box-shadow: 4px 4px 0 var(--link); }
+  .stick.hide-top { opacity: 0; pointer-events: none; transform: translateY(14px); }
+  .stick { transition: opacity 0.2s ease, transform 0.2s ease; display: block; position: fixed; left: 12px; right: 80px; bottom: max(12px, env(safe-area-inset-bottom, 0px)); z-index: 20; text-align: center; font-family: var(--font-display); font-weight: 800; font-stretch: 90%; font-size: 0.95rem; letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none; padding: 16px; background: var(--ink); color: var(--bg); border: 2px solid var(--ink); box-shadow: 4px 4px 0 var(--link); }
   .facts { grid-template-columns: minmax(0, 1fr); }
   .fact, .fact + .fact { padding: 16px 0; border-left: 0; }
   .fact + .fact { border-top: 1px solid var(--line); }
@@ -344,6 +340,69 @@ ol.two { list-style: none; margin: 0; padding: 0; }
   .wa { width: 56px; height: 56px; padding: 0; justify-content: center; right: 12px; bottom: max(12px, env(safe-area-inset-bottom, 0px)); }
   .wa span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 }
+
+/* Portada */
+.hero { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 4fr); gap: 32px clamp(32px, 6vw, 88px); margin-top: 32px; align-items: center; }
+.eyebrow { margin: 0 0 14px; font-family: var(--font-mono); font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.hero h1 { font-size: clamp(2.7rem, 5.9vw, 5.3rem); line-height: 1; text-wrap: balance; }
+.hero .lead { margin: 20px 0 0; max-width: 46ch; font-size: 1.15rem; line-height: 1.55; color: var(--ink); opacity: 0.86; }
+.hero .cta { align-items: center; gap: 14px 26px; margin-top: 24px; }
+.btn-main { font-size: 1.02rem; padding: 18px 28px; box-shadow: 5px 5px 0 var(--blue); }
+.btn-main:hover { box-shadow: 2px 2px 0 var(--blue); transform: translate(3px, 3px); }
+.btn-text { font-family: var(--font-display); font-weight: 700; font-stretch: 90%; font-size: 0.95rem; letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none; padding: 6px 0; border-bottom: 2px solid currentColor; }
+.btn-text:hover { color: var(--link); }
+.cta-note { margin: 14px 0 0; font-size: 0.9rem; color: var(--muted); }
+.proof { list-style: none; display: grid; grid-template-columns: repeat(3, auto); justify-content: start; gap: 0 clamp(18px, 3vw, 40px); margin: 26px 0 0; padding: 14px 0 0; border-top: 2px solid var(--ink); }
+.proof li { display: grid; gap: 2px; align-content: start; }
+.proof b { font-family: var(--font-display); font-weight: 800; font-stretch: 72%; font-size: 2.3rem; line-height: 0.95; letter-spacing: -0.01em; }
+.proof span { font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted); max-width: 20ch; line-height: 1.35; }
+.hero-photo { position: relative; margin: 0; justify-self: end; width: min(100%, 380px); }
+.hero-photo .frame { aspect-ratio: 4 / 5; background: var(--yellow); box-shadow: 10px 10px 0 var(--blue); overflow: hidden; }
+.hero-photo img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.hero-photo .hand { position: absolute; left: -22px; bottom: 26px; margin: 0; padding: 4px 12px 6px; background: var(--yellow); color: #0B0C10; border: 2px solid #0B0C10; font-size: 1.35rem; transform: rotate(-3deg); }
+.nav a.nav-cta { background: var(--yellow); color: #0B0C10; padding: 9px 14px; letter-spacing: 0.05em; }
+.nav a.nav-cta:hover { background: var(--link); color: #fff; }
+.tree-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 6px 24px; margin: 80px 0 22px; padding-top: 22px; border-top: 4px solid var(--ink); }
+.tree-head .hint { margin: 0; }
+@media (prefers-reduced-motion: no-preference) {
+  .hero-copy > * { animation: rise 0.7s cubic-bezier(.2,.7,.2,1) both; }
+  .hero-copy > :nth-child(2) { animation-delay: 0.08s; }
+  .hero-copy > :nth-child(3) { animation-delay: 0.16s; }
+  .hero-copy > :nth-child(4) { animation-delay: 0.24s; }
+  .hero-copy > :nth-child(5) { animation-delay: 0.3s; }
+  .hero-copy > :nth-child(6) { animation-delay: 0.36s; }
+  .hero-photo .frame { animation: rise 0.8s 0.2s cubic-bezier(.2,.7,.2,1) both; }
+  .hero-photo .hand { animation: tag 0.5s 0.9s cubic-bezier(.2,1.4,.4,1) both; }
+  .scribble svg { animation: draw 0.7s 0.7s ease-out both; }
+}
+@keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+@keyframes draw { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
+@keyframes tag { from { opacity: 0; transform: rotate(-3deg) scale(0.7); } to { opacity: 1; transform: rotate(-3deg) scale(1); } }
+@media (max-width: 900px) {
+  .tree-head { margin-top: 56px; }
+}
+@media (max-width: 720px) {
+  .hero { grid-template-columns: minmax(0, 1fr); margin-top: 32px; }
+  .hero-photo { justify-self: start; width: min(100%, 320px); margin-left: 0; }
+}
+@media (max-width: 620px) {
+  .hero { grid-template-columns: minmax(0, 1fr) 112px; gap: 0 14px; margin-top: 22px; }
+  .hero-copy { display: contents; }
+  .hero-copy > * { grid-column: 1 / -1; }
+  .eyebrow { margin-bottom: 12px; font-size: 0.68rem; }
+  .hero h1 { font-size: clamp(2.6rem, 12.4vw, 3.3rem); }
+  .hero .lead { grid-column: 1; grid-row: 3; margin-top: 16px; font-size: 1rem; }
+  .hero-photo { grid-column: 2; grid-row: 3 / span 2; align-self: start; justify-self: stretch; width: 100%; margin-top: 16px; }
+  .hero-photo .frame { box-shadow: 5px 5px 0 var(--blue); }
+  .hero-photo .hand { display: none; }
+  .hero .cta { grid-column: 1; grid-row: 4; flex-direction: column; align-items: stretch; gap: 10px; margin-top: 14px; }
+  .btn-main { padding: 16px 12px; font-size: 0.86rem; letter-spacing: 0.04em; text-align: center; }
+  .btn-text { align-self: flex-start; }
+  .cta-note { margin-top: 12px; font-size: 0.85rem; }
+  .proof { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0 10px; margin-top: 22px; }
+  .proof b { font-size: 1.7rem; }
+  .proof span { font-size: 0.62rem; }
+}
 </style>
 
 <script type="application/ld+json">
@@ -380,24 +439,35 @@ ol.two { list-style: none; margin: 0; padding: 0; }
       <a href="#proceso">Cómo trabajo</a>
       <a href="#casos">Casos</a>
       <a href="#sobre-mi">Sobre mí</a>
-      <a href="#contacto">Contacto</a>
+      <a class="nav-cta" href="#contacto" data-evt="nav_diagnostico">Diagnóstico gratuito</a>
     </nav>
   </header>
 
   <main id="inicio">
-    <section class="intro">
-      <h1>Ordeno cómo tu empresa capta, atiende y <span class="scribble">mide<svg viewBox="0 0 60 12" preserveAspectRatio="none" aria-hidden="true"><path d="M2 7 Q 9 1 16 7 T 30 7 T 44 7 T 58 5"/></svg></span> a sus clientes</h1>
-      <div>
-        <p class="lead">Conecto publicidad, automatización con IA y desarrollo web para que cada oportunidad de venta se registre, reciba seguimiento a tiempo y se pueda medir. Trabajo con empresas y emprendedores que quieren dejar de depender de tareas manuales.</p>
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">Marketing · Automatización · Web</p>
+        <h1>Ordeno cómo tu empresa capta, atiende y <span class="scribble">mide<svg viewBox="0 0 60 12" preserveAspectRatio="none" aria-hidden="true"><path d="M2 7 Q 9 1 16 7 T 30 7 T 44 7 T 58 5"/></svg></span> a sus clientes</h1>
+        <p class="lead">Conecto publicidad, automatización y web para que cada oportunidad de venta se registre, reciba seguimiento y se pueda medir.</p>
         <div class="cta">
-          <a class="btn btn-main" href="#contacto">Diagnóstico gratuito</a>
-          <a class="btn btn-ghost" href="#casos">Ver casos</a>
+          <a class="btn btn-main" href="#contacto" data-evt="hero_diagnostico">Diagnóstico gratuito <span aria-hidden="true">→</span></a>
+          <a class="btn-text" href="#casos" data-evt="hero_casos">Ver casos <span aria-hidden="true">→</span></a>
         </div>
+        <p class="cta-note">Sin costo · te respondo por correo o WhatsApp</p>
+        <ul class="proof" aria-label="Respaldo">
+          <li><b>10+</b><span>años de experiencia</span></li>
+          <li><b>3</b><span>plataformas de anuncios</span></li>
+          <li><b>Quito</b><span>Ecuador</span></li>
+        </ul>
       </div>
+      <figure class="hero-photo">
+        <div class="frame"><img id="portrait-img" alt="Retrato de Xavier Buenaño, con saco gris y camisa blanca, sobre fondo amarillo" src="assets/xavier.jpg" width="1122" height="1402" fetchpriority="high" decoding="async"></div>
+        <figcaption class="hand">hablemos de tu negocio</figcaption>
+      </figure>
     </section>
 
     <section id="soluciones" aria-label="Servicios y soluciones">
-      <p class="hand hint"><svg width="34" height="26" viewBox="0 0 34 26" aria-hidden="true"><path d="M5 24 Q 6 10 24 4 M17 3 L25 4 L22 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>toca un servicio para resaltar sus soluciones</span></p>
+      <div class="tree-head"><h2>Qué hago</h2><p class="hand hint"><svg width="34" height="26" viewBox="0 0 34 26" aria-hidden="true"><path d="M5 24 Q 6 10 24 4 M17 3 L25 4 L22 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>toca un servicio para resaltar sus soluciones</span></p></div>
 
       <div class="tree" id="tree">
         <svg class="wires" id="wires" aria-hidden="true"></svg>
@@ -406,10 +476,6 @@ ol.two { list-style: none; margin: 0; padding: 0; }
         <span class="col-label">Soluciones</span>
 
         <div class="root" id="root">
-          <p class="hand root-note"><span>con quién vas a hablar</span><svg width="44" height="30" viewBox="0 0 44 30" aria-hidden="true"><path d="M3 5 Q 30 0 36 24 M29 19 L36 26 L40 16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></p>
-          <div class="portrait" id="portrait">
-            <img id="portrait-img" alt="Retrato de Xavier Buenaño, con saco gris y camisa blanca, sobre fondo amarillo" src="assets/xavier.jpg" width="1122" height="1402">
-          </div>
           <p class="root-role">Director de Marketing y Comunicación</p>
           <p class="root-meta">Sotomayor Consulting · Quito, Ecuador</p>
           <p class="root-text">Más de diez años entre comunicación, producción audiovisual y estrategia digital.</p>
@@ -589,7 +655,7 @@ ol.two { list-style: none; margin: 0; padding: 0; }
       <div>
         <p>Pide tu diagnóstico gratuito de cómo captas, atiendes y mides a tus clientes. Revisamos tu situación actual y definimos por dónde conviene empezar.</p>
         <p class="hand"><svg width="34" height="26" viewBox="0 0 34 26" aria-hidden="true"><path d="M5 24 Q 6 10 24 4 M17 3 L25 4 L22 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>el diagnóstico no tiene costo</span></p>
-        <button class="cta-form" id="open-form" type="button" aria-haspopup="dialog">Cuéntame tu caso</button>
+        <button class="cta-form" data-evt="abrir_formulario" id="open-form" type="button" aria-haspopup="dialog">Cuéntame tu caso</button>
         <div class="mail">
           <span class="mail-addr" id="mail-addr">francisco.buenano@gmail.com</span>
           <button class="copy" id="copy-btn" type="button">Copiar</button>
@@ -602,11 +668,11 @@ ol.two { list-style: none; margin: 0; padding: 0; }
     </section>
   </main>
 
-  <a class="wa" href="https://wa.me/593984485408?text=Hola%2C%20necesito%20mayor%20informaci%C3%B3n.%20Mi%20nombre%20es%3A%20" target="_blank" rel="noopener" aria-label="Escribir por WhatsApp">
+  <a class="wa" data-evt="whatsapp_click" href="https://wa.me/593984485408?text=Hola%2C%20necesito%20mayor%20informaci%C3%B3n.%20Mi%20nombre%20es%3A%20" target="_blank" rel="noopener" aria-label="Escribir por WhatsApp">
     <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 21l1.6-4.8A9 9 0 1 1 8 19.6L3 21z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M8.5 8.5c.4 3 2.9 5.6 6 6.5l1.5-1.6-2.2-1.1-1 .8c-1-.5-1.8-1.3-2.3-2.3l.8-1-1.1-2.2-1.7 0z" fill="currentColor"/></svg>
     <span>WhatsApp</span>
   </a>
-  <a class="stick" href="#contacto">Diagnóstico gratuito</a>
+  <a class="stick" href="#contacto" data-evt="sticky_diagnostico">Diagnóstico gratuito</a>
   <footer class="foot">
     <span>© 2026</span>
     <span>Quito, Ecuador</span>
@@ -848,6 +914,7 @@ ol.two { list-style: none; margin: 0; padding: 0; }
     msg.hidden = false;
   }
   function finish(nombre) {
+    try { (window.dataLayer = window.dataLayer || []).push({ event: "lead_form_submit" }); } catch (e) {}
     doneTitle.textContent = "¡Gracias, " + nombre + "!";
     doneText.textContent = "Recibí tu mensaje. Reviso tu caso y te respondo pronto" +
       (form.elements["telefono"].value.trim() ? " por correo o WhatsApp." : " por correo.");
@@ -902,5 +969,21 @@ ol.two { list-style: none; margin: 0; padding: 0; }
     show("Se abrió tu programa de correo con el mensaje listo. Si no se abrió, copia el texto y escríbeme a " + TO + ".", plain);
   });
 })();
+</script>
+<script>
+/* Eventos de clic para medir con Google Tag Manager (dataLayer). */
+(function () {
+  var stick = document.querySelector(".stick"), hero = document.querySelector(".hero");
+  if (!stick || !hero || !("IntersectionObserver" in window)) return;
+  stick.classList.add("hide-top");
+  new IntersectionObserver(function (en) {
+    stick.classList.toggle("hide-top", en[0].isIntersecting);
+  }, { threshold: 0.35 }).observe(hero);
+})();
+document.addEventListener("click", function (e) {
+  var el = e.target.closest && e.target.closest("[data-evt]");
+  if (!el) return;
+  try { (window.dataLayer = window.dataLayer || []).push({ event: "cta_click", cta: el.getAttribute("data-evt") }); } catch (err) {}
+});
 </script>
 </body></html>
