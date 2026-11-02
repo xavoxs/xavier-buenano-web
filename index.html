@@ -403,6 +403,32 @@ ol.two { list-style: none; margin: 0; padding: 0; }
   .proof b { font-size: 1.7rem; }
   .proof span { font-size: 0.62rem; }
 }
+
+/* Oferta en tres peldaños */
+.sec.wide { grid-template-columns: minmax(0, 1fr); }
+.offers { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; align-items: end; }
+.peld { position: relative; display: flex; flex-direction: column; background: var(--surface); border: 2px solid var(--ink); padding: 22px 22px 24px; }
+.peld:nth-child(1) { padding-top: 88px; }
+.peld:nth-child(2) { padding-top: 126px; }
+.peld:nth-child(3) { padding-top: 164px; }
+.peld:nth-child(2) { border-top-color: var(--blue); border-top-width: 6px; }
+.peld:nth-child(3) { border-top-color: var(--blue); border-top-width: 6px; }
+.peld-n { position: absolute; left: 20px; top: 8px; font-family: var(--font-display); font-weight: 800; font-stretch: 72%; font-size: 4.4rem; line-height: 1; color: var(--link); opacity: 0.95; }
+.peld-tag { position: absolute; right: 16px; top: 16px; padding: 4px 10px; background: var(--yellow); color: #0B0C10; font-family: var(--font-mono); font-size: 0.7rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; border: 2px solid #0B0C10; }
+.peld .t { margin: 0 0 6px; font-size: 1.45rem; }
+.peld-for { margin: 0; color: var(--ink); font-weight: 500; }
+.peld ul { list-style: none; margin: 16px 0 0; padding: 0; }
+.peld li { position: relative; padding: 9px 0 9px 20px; border-top: 1px solid var(--line); font-size: 0.95rem; color: var(--muted); }
+.peld li::before { content: ""; position: absolute; left: 0; top: 17px; width: 9px; height: 9px; background: var(--blue); }
+.peld-ideal { margin: 14px 0 20px; font-size: 0.9rem; color: var(--muted); }
+.peld-ideal b { font-family: var(--font-mono); font-size: 0.72rem; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: var(--link); margin-right: 4px; }
+.peld .btn { margin-top: auto; text-align: center; cursor: pointer; font-family: var(--font-display); }
+.btn-main { cursor: pointer; }
+.offers-note { margin: 22px 0 0; font-size: 0.9rem; color: var(--muted); }
+@media (max-width: 900px) {
+  .offers { grid-template-columns: minmax(0, 1fr); align-items: stretch; }
+  .peld:nth-child(n) { padding-top: 84px; }
+}
 </style>
 
 <script type="application/ld+json">
@@ -557,6 +583,54 @@ ol.two { list-style: none; margin: 0; padding: 0; }
           <p>Desarrollo sitios, tiendas y sistemas, e implemento ERP Odoo para ordenar la operación.</p>
         </div>
       </div>
+    </section>
+
+    <section class="sec wide" id="ofertas">
+      <div>
+        <h2>Cómo puedo ayudarte</h2>
+        <p class="sec-sub">Tres formas de trabajar juntos, de la más simple a la más completa.</p>
+      </div>
+      <div class="offers">
+        <article class="peld">
+          <span class="peld-n" aria-hidden="true">1</span>
+          <span class="peld-tag">Gratis</span>
+          <h3 class="t">Diagnóstico</h3>
+          <p class="peld-for">Para saber dónde se pierden tus oportunidades.</p>
+          <ul>
+            <li>Reviso cómo captas, atiendes y mides hoy.</li>
+            <li>Señalo los puntos donde se pierden contactos.</li>
+            <li>Te digo por dónde conviene empezar.</li>
+          </ul>
+          <p class="peld-ideal"><b>Ideal si</b> no sabes qué está fallando.</p>
+          <button class="btn btn-main" type="button" data-open-form data-evt="oferta_1_diagnostico">Pedir diagnóstico <span aria-hidden="true">→</span></button>
+        </article>
+        <article class="peld">
+          <span class="peld-n" aria-hidden="true">2</span>
+          <h3 class="t">Sistema de captación y seguimiento</h3>
+          <p class="peld-for">Para que cada contacto se registre y se atienda a tiempo.</p>
+          <ul>
+            <li>Formularios y páginas de destino conectados.</li>
+            <li>Campañas en Meta, Google o TikTok Ads.</li>
+            <li>Flujo automático hacia tu CRM y WhatsApp.</li>
+            <li>Medición de cada paso con Google Tag Manager.</li>
+          </ul>
+          <p class="peld-ideal"><b>Ideal si</b> ya recibes contactos y se te quedan sin respuesta.</p>
+          <button class="btn btn-ghost" type="button" data-open-form data-evt="oferta_2_sistema">Cuéntame tu caso <span aria-hidden="true">→</span></button>
+        </article>
+        <article class="peld">
+          <span class="peld-n" aria-hidden="true">3</span>
+          <h3 class="t">Medición y mejora continua</h3>
+          <p class="peld-for">Para decidir con datos y mejorar cada mes.</p>
+          <ul>
+            <li>Revisión periódica de resultados.</li>
+            <li>Ajustes en campañas y flujos.</li>
+            <li>Un informe claro de qué funciona y qué no.</li>
+          </ul>
+          <p class="peld-ideal"><b>Ideal si</b> ya tienes el sistema y quieres optimizarlo.</p>
+          <button class="btn btn-ghost" type="button" data-open-form data-evt="oferta_3_mejora">Cuéntame tu caso <span aria-hidden="true">→</span></button>
+        </article>
+      </div>
+      <p class="offers-note">El alcance de cada paso se define contigo a partir del diagnóstico.</p>
     </section>
 
     <section class="sec" id="proceso">
@@ -892,6 +966,8 @@ ol.two { list-style: none; margin: 0; padding: 0; }
     openBtn.focus();
   }
   openBtn.addEventListener("click", open);
+  var extra = document.querySelectorAll("[data-open-form]");
+  for (var k = 0; k < extra.length; k++) extra[k].addEventListener("click", open);
   closeBtn.addEventListener("click", close);
   doneClose.addEventListener("click", close);
   dlg.addEventListener("click", function (e) { if (e.target === dlg) close(); });
